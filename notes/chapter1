@@ -1,0 +1,18 @@
+1. LinearLayout inherits from a subclass of View named ViewGroup . A ViewGroup is a widget that
+contains and arranges other widgets. You use a LinearLayout when you want widgets arranged
+in a single column or row. Other ViewGroup subclasses are FrameLayout , TableLayout , and
+RelativeLayout .
+2.match_parent view will be as big as its parent
+wrap_content view will be as big as its contents require
+3.dp is density independent pxels.
+4.The order in which children are defined determines the order in which they appear on screen.In a horizontal LinearLayout , the
+first child defined will be leftmost. (Unless the language of the device is a language that runs right-to-
+left, such as Arabic or Hebrew. In that case, the first child will be rightmost.)
+5.android:text attributes are not literal strings. They are references to string resources.
+A string resource is a string that lives in a separate XML file called a strings file. You can give a widget
+a hard-coded string, like android:text="True" , but it is usually not a good idea. Placing strings into a
+separate file and then referencing them is better because it makes localization easy.
+6.Although the default strings file is named strings.xml , you can name a strings file anything you want.
+You can also have multiple strings files in a project. As long as the file is located in res/values/ , has
+a resources root element, and contains child string elements, your strings will be found and used
+appropriately.
