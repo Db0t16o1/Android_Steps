@@ -1,0 +1,34 @@
+The simplest way one activity can start another is with the Activity method:
+            public void startActivity(Intent intent)
+You might guess that startActivity(...) is a static method that you call on the Activity subclass that
+you want to start. But it is not. When an activity calls startActivity(...) , this call is sent to the OS.
+In particular, it is sent to a part of the OS called the ActivityManager . The ActivityManager then
+creates the Activity instance and calls its onCreate(...) method.How does the ActivityManager know which Activity to start? 
+That information is in the Intent parameter.Intents are multi-purpose communication tools, and the Intent class provides different constructors
+depending on what you are using the intent to do.
+public Intent(Context packageContext, Class<?> cls) //for telling the activity manager which activity to start.
+Class Argument --> the .java file of activity
+Context Argument --> Application package for location 
+Intent i = new Intent(callingActivity.this, ActivityToStart.class);
+startActivity(i);
+Activity manager checks for .class file in the AndroidManifest file. If found you're done. if not ActivityNotFoundException is returned.
+When you create an Intent with a Context and a Class object, you are creating an explicit intent. You
+use explicit intents to start activities within your application.
+When an activity in your application wants to start an activity in another application, you create an
+implicit intent.
+Extras are arbitrary data that the calling activity can include with an intent. You can think of them like
+constructor arguments, even though you cannot use a custom constructor with an activity subclass
+(Android creates activity instances and is responsible for their lifecycle). The OS forwards the intent to
+the recipient activity, which can then access the extras and retrieve the data.
+An extra is structured as a key-value pair.To add an extra to an intent, you use Intent.putExtra(...) . In particular, you will be calling
+public Intent putExtra(String name, boolean value)
+Multiple calls can be chained. There are many flavors based on value type.
+A static method allows us to create an Intent properly configured with the extras CheatActivity
+will need.
+Using a newIntent(...)
+method like this for your activity subclasses will make it easy for other code to properly configure their
+launching intents.
+public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
+Intent i = new Intent(packageContext, CheatActivity.class);
+i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
+return i;}
