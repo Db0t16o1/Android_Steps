@@ -32,3 +32,36 @@ public static Intent newIntent(Context packageContext, boolean answerIsTrue) {
 Intent i = new Intent(packageContext, CheatActivity.class);
 i.putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue);
 return i;}
+To retrieve the value from the extra, you will use:
+public boolean getBooleanExtra(String name, boolean defaultValue)
+When you want to hear back from the child activity, you call the following Activity method:
+public void startActivityForResult(Intent intent, int requestCode)
+The first parameter is the same intent as before. The second parameter is the request code. The request
+code is a user-defined integer that is sent to the child activity and then received back by the parent. It
+is used when an activity starts more than one type of child activity and needs to know who is reporting.
+
+There are two methods you can call in the child activity to send data back to the parent:
+public final void setResult(int resultCode)
+public final void setResult(int resultCode, Intent data)
+Typically, the result code is one of two predefined constants: Activity.RESULT_OK or
+Activity.RESULT_CANCELED . (You can use another constant, RESULT_FIRST_USER , as an offset when
+defining your own result codes.)
+Setting result codes is useful when the parent needs to take different action depending on how the child
+activity finished.
+For example, if a child activity had an OK button and a Cancel button, the child activity would set
+a different result code depending on which button was pressed. Then the parent activity would take
+different action depending on the result code.
+Calling setResult(...) is not required of the child activity. If you do not need to distinguish
+between results or receive arbitrary data on an intent, then you can let the OS send a default
+result code. A result code is always returned to the parent if the child activity was started with
+startActivityForResult(...) . If setResult(...) is not called, then when the user presses the Back
+button the parent will receive Activity.RESULT_CANCELED .
+
+In this implementation, you are interested in passing some specific data back to QuizActivity . So you
+are going to create an Intent , put an extra on it, and then call Activity.setResult(int, Intent) to
+get that data into parent activity's hands.
+Then, when the user presses the Back button to return to the ParentActivity , the ActivityManager calls
+the following method on the parent activity:
+protected void onActivityResult(int requestCode, int resultCode, Intent data)
+The parameters are the original request code from ParentActivity and the result code and intent passed
+into setResult(...) .
