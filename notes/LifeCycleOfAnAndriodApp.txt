@@ -1,0 +1,25 @@
+An Andriod app undergoes various cycles in its life time(the time between its launch and exit). These cycles are -:
+1. onCreate
+2. onStart
+3. onResume
+4. onPause
+5. onStop
+6. onDestroy
+
+onCreate :- 
+We know that UI elements are actually Java objects in heap. The onCreate method place these UI elements in memory.
+
+onStart :-
+This is the stage when elements appear to the user but he/she can still not interact with them, in other words it is the stage when the UI elements are visible to the user.
+
+OnResume -
+The stage when the user can make interaction with the UI elements.
+
+onPause :-
+User can no longer make interaction with the UI elements.
+
+onStop :-
+UI elements are removed from the screen(no longer visible to the user, but they are present in the memory). This happens when the user toogles from one app to the other.
+
+onDestory :-
+UI objects are removed from the memory, this happens when the user quits the app/
